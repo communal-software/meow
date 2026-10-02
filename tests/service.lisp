@@ -369,6 +369,33 @@
         (is (null status))
         (is (eq :down (first reason)))))))
 
+(test service-statuses-reads-services-and-processes-in-order
+  (with-fresh-registry ()
+    (multiple-value-bind (p s) (start 'tracked :name :t)
+      (let ((gone (start 'tracked :name :gone)))
+        (drain)
+        (stop-and-join gone)
+        (destructuring-bind (by-service by-process (nil down)) (meow:service-statuses (list s p gone))
+          (is (equal '(:ready nil) by-service))
+          (is (equal '(:ready nil) by-process))
+          (is (eq :down (first down))))
+        (stop-and-join p)))))
+
+(test service-statuses-share-one-timeout
+  (with-fresh-registry ()
+    (let ((a (start 'provider :name :slow-a))
+          (b (start 'provider :name :slow-b)))
+      (meow:cast a '(:sleep 1.5))
+      (meow:cast b '(:sleep 1.5))
+      (sleep 0.1)
+      (let* ((began (get-internal-real-time))
+             (replies (meow:service-statuses (list a b) :timeout 0.5))
+             (elapsed (/ (- (get-internal-real-time) began) internal-time-units-per-second)))
+        (is (equal '((nil :timeout) (nil :timeout)) replies))
+        (is (< elapsed 0.9) "both waited at once, took ~as" elapsed))
+      (stop-and-join a)
+      (stop-and-join b))))
+
 (test service-status-of-a-service-with-a-missing-dependency-is-waiting
   (with-fresh-registry ()
     (let ((p (start 'consumer :name :c)))

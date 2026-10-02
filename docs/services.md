@@ -71,6 +71,15 @@ status. It takes a `:timeout` (default 5 seconds).
 (service-status (service-process s) :timeout 1) ; => :ready
 ```
 
+`(service-statuses targets)` asks many at once. It takes services or processes,
+asks every process in parallel under one shared `:timeout`, and returns a list
+of `(status problem)` in `targets`' order.
+
+```lisp
+(service-statuses (list a-service a-process busy-process) :timeout 1)
+;; => ((:ready nil) (:ready nil) (nil :timeout))
+```
+
 Each change is announced on the service's root [registry](registry.md)'s
 event bus as `:meow/status` with the service's name, its process, the old
 state and the new one:

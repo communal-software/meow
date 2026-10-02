@@ -178,6 +178,21 @@ that has stopped taking messages returns (values nil status) as CALL does."
       (slot-value target 'status)
       (call target (list '%status) :timeout timeout)))
 
+(defun service-statuses (targets &key (timeout 5))
+  "SERVICE-STATUS of each of TARGETS, services or processes, asking every
+process at once and all waiting on one shared TIMEOUT. Returns a list, in
+TARGETS' order, of (status problem): SERVICE-STATUS's two values, problem nil
+when it answered."
+  (let* ((processes (remove-if (lambda (target) (typep target 'service)) targets))
+         (replies (call-each processes
+                             (make-list (length processes) :initial-element (list '%status))
+                             :timeout timeout)))
+    (mapcar (lambda (target)
+              (if (typep target 'service)
+                  (list (slot-value target 'status) nil)
+                  (pop replies)))
+            targets)))
+
 (defun service-ready-p (service)
   (eq (slot-value service 'status) :ready))
 

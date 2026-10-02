@@ -17,7 +17,7 @@
    #:subscribe #:unsubscribe
    ;; services
    #:service #:defservice #:start-service
-   #:service-name #:service-registry #:service-context #:service-process #:service-ready-p #:service-status
+   #:service-name #:service-registry #:service-context #:service-process #:service-ready-p #:service-status #:service-statuses
    #:service-of #:will-restart-p
    #:service-dependencies #:dependency
    #:metadata #:init #:ready #:dep-down #:handle #:dispose #:update-config
