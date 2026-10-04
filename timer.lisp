@@ -17,11 +17,24 @@
 pending, so M:SUSPEND can park it without clearing *%TIMER-CELLS*. Cleared
 by %TIMER-RESUME.")
 
+(defmacro %with-timer-lock (&body body)
+  "Like WITH-LOCK-HELD on the timer lock, but releases only a lock this thread
+still owns: ECL kills a thread out of CONDITION-WAIT without handing it back."
+  `(progn
+     (bt2:acquire-lock *%timer-lock*)
+     (unwind-protect (progn ,@body)
+       (when (%timer-lock-owned-p)
+         (bt2:release-lock *%timer-lock*)))))
+
+(defun %timer-lock-owned-p ()
+  #+ecl (eq (mp:lock-owner (bt2:lock-native-lock *%timer-lock*)) mp:*current-process*)
+  #-ecl t)
+
 (defun %timer-due ()
   "The cells that have come due, waiting for the soonest one. Nil once
 nothing is pending or *%TIMER-STOP* is set, either of which ends the timer
 thread."
-  (bt2:with-lock-held (*%timer-lock*)
+  (%with-timer-lock
     (loop for now = (%now)
           for due = (unless *%timer-stop*
                       (loop while (and *%timer-cells*
