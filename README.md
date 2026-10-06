@@ -13,6 +13,21 @@ resources to their lifetime as effects.
 
 Runs on SBCL, ECL and CCL.
 
+## Installation
+
+From the takeiteasy Quicklisp dist:
+
+```lisp
+(ql-dist:install-dist "https://takeiteasy.github.io/ql-dist/dist/takeiteasy.txt")
+(ql:quickload :meow)
+```
+
+Or clone into Quicklisp's local-projects:
+
+```sh
+git clone https://github.com/takeiteasy/meow ~/quicklisp/local-projects/meow
+```
+
 ## Docs
 
 - [Getting started](docs/getting-started.md)
