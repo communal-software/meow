@@ -35,7 +35,7 @@ moves, so saving a file unchanged reloads nothing.
 
 Where the platform has native filesystem events — kqueue on macOS — the
 watcher waits on them through
-[trivial-wait](https://github.com/takeiteasy/trivial-wait) and scans as soon
+[trivial-notify](https://github.com/takeiteasy/trivial-notify) and scans as soon
 as a watched file, or the directory holding it, is written. Elsewhere it
 scans every `:interval` seconds.
 

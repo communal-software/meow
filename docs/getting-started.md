@@ -19,14 +19,14 @@ two that need local projects of their own:
 ```sh
 git clone https://github.com/takeiteasy/trivial-high-precision-timer \
     ~/quicklisp/local-projects/trivial-high-precision-timer
-git clone https://github.com/takeiteasy/trivial-wait \
-    ~/quicklisp/local-projects/trivial-wait
+git clone https://github.com/takeiteasy/trivial-notify \
+    ~/quicklisp/local-projects/trivial-notify
 ```
 
 The [logger](logger.md) and the source [watcher](hmr.md) load separately,
 as `meow/logger` and `meow/hmr`. Everything else, including the config-file
 [loader](loader.md), is in `meow` itself. `meow/hmr` watches through
-`trivial-wait`; `meow` itself is portable Common Lisp.
+`trivial-notify`; `meow` itself is portable Common Lisp.
 
 ## Tests
 
