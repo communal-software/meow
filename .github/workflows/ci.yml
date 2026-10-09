@@ -37,8 +37,8 @@ jobs:
         run: |
           git clone --depth 1 https://github.com/takeiteasy/trivial-high-precision-timer \
               ~/quicklisp/local-projects/trivial-high-precision-timer
-          git clone --depth 1 https://github.com/takeiteasy/trivial-notify \
-              ~/quicklisp/local-projects/trivial-notify
+          git clone --depth 1 https://github.com/takeiteasy/trivial-watch \
+              ~/quicklisp/local-projects/trivial-watch
 
       - name: Test
         run: tests/test.sh ${{ matrix.lisp }}

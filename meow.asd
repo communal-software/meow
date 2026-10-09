@@ -37,7 +37,7 @@
   :author "George Watson"
   :license "GPLv3"
   :version "0.1.0"
-  :depends-on ("meow" "trivial-notify")
+  :depends-on ("meow" "trivial-watch")
   :components ((:file "hmr"))
   :in-order-to ((test-op (test-op "meow/hmr/tests"))))
 

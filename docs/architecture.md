@@ -17,7 +17,7 @@ application-specific code.
 ├────────────────────────────────────────────┤
 │ bordeaux-threads · alexandria · closer-mop │
 │ trivial-high-precision-timer               │
-│ trivial-notify                             │
+│ trivial-watch                             │
 └────────────────────────────────────────────┘
 ```
 
