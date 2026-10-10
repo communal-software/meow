@@ -197,7 +197,7 @@ remaining children are updated, with the intercept kept."
   "BT:JOIN-THREAD PROCESS's thread, once its exit hooks have already run --
 the thread has nothing left to do but unwind, so this returns almost at
 once. Ensures %STOP-AND-WAIT never reports a process gone while a fork
-right after it would still see its thread (~takeiteasy/nyaa#72)."
+right after it would still see its thread (~takeiteasy/miao#72)."
   (ignore-errors (bt:join-thread (process-thread process))))
 
 (defun %stop-and-wait (process timeout &optional (reason :shutdown))
@@ -231,7 +231,7 @@ TIMEOUT seconds, default 5, pass and it is killed instead) -- unlike STOP,
 which only sends the request. TIMEOUT :infinity waits without killing.
 Returns t, :killed, or :timeout if it is still running. For a context, this
 implies every child's thread is gone too, the same guarantee M:SUSPEND
-already gives a caller about to fork (~takeiteasy/nyaa#72): STOP alone
+already gives a caller about to fork (~takeiteasy/miao#72): STOP alone
 leaves teardown running in the background, so a fork right after it can
 still see the exiting thread."
   (let ((result (%stop-and-wait process timeout reason)))

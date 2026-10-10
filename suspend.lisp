@@ -2,7 +2,7 @@
 
 ;;; SUSPEND / RESUME: park every process in a context
 ;;; tree without running DISPOSE or unregistering anything, so a caller --
-;;; nyaa's image generations (~takeiteasy/nyaa#48) -- can fork with only its
+;;; nyaa's image generations (~takeiteasy/miao#48) -- can fork with only its
 ;;; own thread alive and pick every service back up afterwards over the same
 ;;; instances, mailboxes, registrations, dependencies and effects.
 ;;;
@@ -11,7 +11,7 @@
 ;;; its own, at the top of %SERVICE-LOOP, never bt:interrupt-thread -- so
 ;;; nothing is cut off mid-handler or mid-call. A slow handler therefore
 ;;; delays suspend rather than being torn, the same trade-off
-;;; checkpoint.lisp's own walk makes (~takeiteasy/nyaa#51).
+;;; checkpoint.lisp's own walk makes (~takeiteasy/miao#51).
 ;;;
 ;;; The tree is found through %CHILDREN-SERVICES and %SERVICE-SELF
 ;;; (context.lisp, service.lisp), both answered over an ordinary call, so

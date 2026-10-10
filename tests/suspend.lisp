@@ -16,7 +16,7 @@
         ;; parks before returning, so BT:THREAD-ALIVE-P should be false by
         ;; now too -- checked #+sbcl only, since CCL's own bookkeeping can
         ;; briefly still report a joined thread alive (the fork use case
-        ;; suspend exists for, nyaa#48, is sbcl-only anyway).
+        ;; suspend exists for, miao#48, is sbcl-only anyway).
         (is (meow:process-alive-p p))
         (is (meow:process-alive-p ctx))
         #+sbcl (is-false (bt:thread-alive-p (meow:process-thread p)))

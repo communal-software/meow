@@ -303,7 +303,7 @@
       (is (eq :shutdown (meow:process-exit-reason p)))
       (stop-and-join ctx))))
 
-;;; STOP-AND-WAIT (~takeiteasy/nyaa#72): STOP alone leaves teardown running
+;;; STOP-AND-WAIT (~takeiteasy/miao#72): STOP alone leaves teardown running
 ;;; in the background, so a caller about to fork right after it (SAVE-IMAGE)
 ;;; can still see the exiting thread. STOP-AND-WAIT doesn't return until the
 ;;; thread itself is gone.
