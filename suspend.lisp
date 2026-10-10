@@ -1,6 +1,6 @@
 (in-package #:meow)
 
-;;; SUSPEND / RESUME (~takeiteasy/meow#64): park every process in a context
+;;; SUSPEND / RESUME: park every process in a context
 ;;; tree without running DISPOSE or unregistering anything, so a caller --
 ;;; nyaa's image generations (~takeiteasy/nyaa#48) -- can fork with only its
 ;;; own thread alive and pick every service back up afterwards over the same
@@ -76,7 +76,7 @@ as it would have anyway."
 ;;; acceptable since a timeout here is already the unusual path (a wedged
 ;;; handler). Upgrade path: wait on every ack concurrently (a per-ack thread,
 ;;; or a single counting semaphore plus a per-process liveness probe) if
-;;; that imprecision ever matters. Tracked in ~takeiteasy/meow#65.
+;;; that imprecision ever matters. Tracked in https://github.com/communal-software/meow/issues/15.
 
 (defun %await-acks (asks deadline)
   "ASKS, each (entry cell ack thread), split into (values parked pending)

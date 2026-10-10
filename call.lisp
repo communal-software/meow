@@ -105,7 +105,7 @@ If it has already exited, nothing is sent and the cell is settled as :down."
     (remove-exit-hook (pending-call-process pending) hook)))
 
 ;;; TODO: one global lock and a graph walk per waiting call; keep per-process
-;;; wait links if call rates matter.
+;;; wait links if call rates matter. Tracked in https://github.com/communal-software/meow/issues/3.
 (defvar *%wait-lock* (bt2:make-lock :name "wait graph"))
 
 (defvar *%waits* (make-hash-table :test 'eq)

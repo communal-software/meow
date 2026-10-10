@@ -1,6 +1,6 @@
 (in-package #:meow/tests)
 
-;;; SUSPEND / RESUME (~takeiteasy/meow#64).
+;;; SUSPEND / RESUME.
 
 (def-suite :meow/suspend :in :meow)
 (in-suite :meow/suspend)

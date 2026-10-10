@@ -10,7 +10,7 @@
 
 ;;; TODO: the message is formatted whether or not a logger is listening or
 ;;; would keep it; pass the control string and args through the event and
-;;; format in the logger if log rates matter.
+;;; format in the logger if log rates matter. Tracked in https://github.com/communal-software/meow/issues/19.
 (defun log-message (service level control &rest args)
   "Emit CONTROL, formatted with ARGS, as a LEVEL record from SERVICE."
   (a:when-let ((registry (service-registry service)))

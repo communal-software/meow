@@ -287,7 +287,7 @@ still see the exiting thread."
         (subtypep class head-class))))
 
 ;;; TODO: ancestors' intercepts are read from this context's thread without
-;;; a lock; pass them down with each refresh if that race matters.
+;;; a lock; pass them down with each refresh if that race matters. Tracked in https://github.com/communal-software/meow/issues/9.
 (defun %config (context class initargs)
   "INITARGS for a CLASS child of CONTEXT, merged over the matching intercepts
 of CONTEXT and its ancestors. Nearer contexts and later entries win."
@@ -443,7 +443,7 @@ stores them."
                (new (%config context (child-class child) merged)))
           ;; TODO: a probe instance reruns initialize-instance side effects
           ;; and validates initforms, not live state; validate a copy of the
-          ;; live instance if that matters.
+          ;; live instance if that matters. Tracked in https://github.com/communal-software/meow/issues/5.
           (when initargs
             (apply #'make-instance (child-class child) new))
           (%set-mount-options child options)

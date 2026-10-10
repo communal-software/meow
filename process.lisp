@@ -1,7 +1,7 @@
 (in-package #:meow)
 
 ;;; TODO: one thread per process; move to a shared dispatcher if process
-;;; counts reach the hundreds.
+;;; counts reach the hundreds. Tracked in https://github.com/communal-software/meow/issues/1.
 
 (defvar *self* nil
   "The process the current thread is running as.")

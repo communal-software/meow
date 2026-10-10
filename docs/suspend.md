@@ -79,7 +79,7 @@ before the ordinary loop starts taking messages again.
 
 The [hmr watcher](hmr.md)'s native file-notify thread is exactly this
 case, and does not yet specialise either method
-([#66](https://todo.sr.ht/~takeiteasy/meow/66)) -- a tree that mounts it
+([#16](https://github.com/communal-software/meow/issues/16)) -- a tree that mounts it
 still has that thread alive after `suspend`.
 
 ## Limitations
@@ -89,7 +89,7 @@ still has that thread alive after `suspend`.
   -- a process that never acks starves the budget left for every entry
   checked after it, even ones that parked immediately. Acceptable since a
   timeout here is already the unusual path.
-  ([#65](https://todo.sr.ht/~takeiteasy/meow/65))
+  ([#15](https://github.com/communal-software/meow/issues/15))
 - No clock rebasing is needed: `%now` is monotonic across a
   `save-lisp-and-die` reload, so a pending [timer](timers.md) deadline
   computed before a suspend still means the same wall-clock time after

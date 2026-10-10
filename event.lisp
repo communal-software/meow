@@ -71,7 +71,7 @@ FUNCTION is called at most once."
         thereis (eq s context)))
 
 ;;; TODO: walks every listener's context chain per emit, O(listeners x depth);
-;;; keep listener tables per context if emit rates matter.
+;;; keep listener tables per context if emit rates matter. Tracked in https://github.com/communal-software/meow/issues/2.
 (defun %listeners (target event)
   (let* ((registry (%root (if (typep target 'registry)
                               target

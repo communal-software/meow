@@ -91,7 +91,7 @@ report one slot rather than every problem the config has.")
                                            type))))))
 
 ;;; TODO: the precedence list is walked on every make-instance; cache per
-;;; class if mount rates matter.
+;;; class if mount rates matter. Tracked in https://github.com/communal-software/meow/issues/4.
 (defun %type-problems (service)
   (loop for (name . type) in (%slot-types (class-of service))
         when (and (slot-boundp service name)
@@ -284,7 +284,7 @@ resource, is its disposer. Returns the resource and the release function."
 
 ;;; TODO: scans every effect per scope release, and every effect carries the
 ;;; scope stack it was acquired in; key cells by scope token if scope counts
-;;; grow.
+;;; grow. Tracked in https://github.com/communal-software/meow/issues/20.
 (defun %release-scope (service token)
   "Release the effects SERVICE acquired in scope TOKEN, newest first."
   (%require-own-process service)

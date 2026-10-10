@@ -132,7 +132,7 @@
   ;; on ECL once enough piled up. Threads are apiv1 (bt:) precisely so
   ;; spawned processes never touch that table at all.
   ;;
-  ;; A GC first (~takeiteasy/meow#67) settles BEFORE at whatever earlier
+  ;; A GC first settles BEFORE at whatever earlier
   ;; suites left uncollected, so a GC landing mid-test can only ever lower
   ;; the count from that already-settled baseline -- never trip this on an
   ;; entry apiv1 spawning never touched.
